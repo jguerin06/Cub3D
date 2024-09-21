@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/09/19 11:16:43 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/09/21 12:44:34 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_parse
 
 typedef struct s_infos
 {
+	char	**map;
+	char	**truemap;
 	int	x;
 	int	y;
 
@@ -55,7 +57,8 @@ typedef struct s_infos
 // ft_check //
 
 int			ft_is_cub(char *file);
-int			ft_check_file(char *str, int i);
+int			ft_check_file(char *str, int countLine);
+int			copy_file(char *str, t_struct2 *s_infos);
 
 // ft_error //
 
@@ -66,7 +69,7 @@ int			wall_around(char *str);
 
 // ft_init //
 
-t_struct	*ft_init_struct(t_struct *s_parse);
+void		ft_init_struct(t_struct *s_parse, t_struct2 *s_infos);
 
 // ft_map_utils //
 

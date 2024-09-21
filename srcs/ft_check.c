@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:40:51 by jguerin           #+#    #+#             */
-/*   Updated: 2024/09/19 14:03:44 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/09/21 12:53:03 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,51 @@ int	ft_is_cub(char *file)
 	return (1);
 }
 
-int	ft_check_file(char *str, int i)
+int	ft_check_file(char *str, int countLine)
 {
-	int fd;
+	int		fd;
+	char	*line;
 	
-	fd = open(str + i, O_RDONLY);
+	line = NULL;
+	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
 		close(fd);
-		return (1);
+		return (-1);
+	}
+	while(1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break;
+		free(line);
+		countLine++;
+	}
+	close(fd);
+	return (countLine); // s_infos y = countLine
+}
+
+int	copy_file(char *str, t_struct2 *s_infos)
+{
+	int i;
+	int fd;
+
+	i = 0;
+	s_infos->map = malloc(sizeof(char *) * (s_infos->y + 1));
+	if (s_infos->map == NULL)
+		return(-1);
+	fd = open(str, O_RDONLY);
+	if (fd == -1)
+	{
+		close (fd);
+		return (-1);
+	}
+	while(1)
+	{
+		s_infos->map[i] = get_next_line(fd);
+		if (s_infos->map[i] == NULL)
+			break;
+		i++;
 	}
 	close(fd);
 	return (0);

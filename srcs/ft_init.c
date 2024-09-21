@@ -6,13 +6,13 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:48:21 by jguerin           #+#    #+#             */
-/*   Updated: 2024/09/19 11:10:11 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/09/21 09:44:08 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_struct	*ft_init_struct(t_struct *s_parse)
+void	ft_init_struct(t_struct *s_parse, t_struct2 *s_infos)
 {
 	s_parse->north = 0;
 	s_parse->south = 0;
@@ -27,5 +27,6 @@ t_struct	*ft_init_struct(t_struct *s_parse)
 	s_parse-> map_dup = 0;
 	s_parse->map_no_pos = 0;
 	s_parse->no_map = 0;
-	return(s_parse);
+	s_infos->map = NULL;
+	s_infos->truemap = NULL;
 }
