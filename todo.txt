@@ -1,0 +1,7 @@
+Faire une fonction qui verifie si on ouvre un dossier (si c'est le cas on renvoit faux) : true
+
+Commencer la fonction qui regroupe le parsing
+
+Trouver comment gerer le NO SO WE EA F C et tester si le chemin est valide
+
+Faire les couleurs

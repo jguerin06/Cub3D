@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 14:49:15 by jguerin           #+#    #+#             */
-/*   Updated: 2024/09/21 13:21:31 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/02 13:14:30 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,20 @@ int	wall_around(char *str)
 	if (str && str[i] != '1')
 		return (1);
 	return (0);
+}
+
+int	err_msg(char *arg, char *error, int code)
+{
+	ft_putstr_fd("cub3D: Error", 2);
+	if (arg)
+	{
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(arg, 2);
+	}
+	if (error)
+	{
+		ft_putstr_fd(": ", 2);
+		ft_putstr_fd(error, 2);
+	}
+	return (code);
 }

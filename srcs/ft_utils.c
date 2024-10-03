@@ -6,11 +6,27 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:59:38 by jguerin           #+#    #+#             */
-/*   Updated: 2024/09/19 11:16:17 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/02 13:02:32 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	while (*s != '\0')
+	{
+		ft_putchar_fd(*s, fd);
+		s++;
+	}
+}
 
 int ft_strlenn(const char *s)
 {

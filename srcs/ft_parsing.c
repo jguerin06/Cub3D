@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/09/19 11:05:41 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/03 13:24:09 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,19 @@ t_struct	*ft_get_error(t_struct *s_parse, char **tab, int i)
 		i++;
 	}
 	return (s_parse);
+}
+
+int	ft_check_parsing(char **tab, int error)
+{
+	char		**values;
+	char		**map;
+	t_struct	*s_parse;
+
+	if (!(s_parse = malloc(sizeof(t_struct))))
+		return (-1);
+	if (!(values = (char **)malloc(sizeof(char *) * 9)))
+		return (-1);
+	s_parse = ft_init_struct(s_parse);
+	s_parse = ft_get_error(s_parse,tab , 0);
+	values = ft_fill_values(tab, s_parse, values, 0);
 }
