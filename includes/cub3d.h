@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/03 13:19:47 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/08 12:10:37 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int				copy_file(char *str, t_struct2 *s_infos);
 // ft_fill //
 
 char			**ft_fill_values(char **tab, t_struct *s_parse, char **values, int i);
+t_struct2		*ft_fill_info(t_struct2 *s_infos, char **tab, int i);
 
 // ft_error //
 
