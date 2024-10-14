@@ -6,36 +6,20 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:59:38 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/02 13:02:32 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:21:07 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_strlenn(const char *s)
 {
-	write(fd, &c, 1);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (!s)
-		return ;
-	while (*s != '\0')
-	{
-		ft_putchar_fd(*s, fd);
-		s++;
-	}
-}
-
-int ft_strlenn(const char *s)
-{
-	int i;
+	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 		i++;
-	return(i);
+	return (i);
 }
 
 int	ft_atoi(char *str)

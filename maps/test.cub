@@ -1,7 +1,7 @@
-NO
-SO
-WE
-EA
+NO ./textures/Wall-1.png
+SO ./textures/Wall-2.png
+WE ./textures/Wall-3.png
+EA ./textures/Wall-4.lol
 
 F
 C

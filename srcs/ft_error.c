@@ -6,15 +6,16 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 14:49:15 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/02 13:14:30 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/10 14:28:09 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+// marwen tu feuxra 1 truque ( : )
 
-int	ft_get_element(char *str) // marwen tu feuxra 1 truque ( : )
+int	ft_get_element(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str && str[i])
@@ -46,7 +47,7 @@ int	ft_double(int i)
 
 int	map_wall(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str && str[i] && str[i] == ' ')
@@ -60,10 +61,10 @@ int	map_wall(char *str)
 
 int	wall_around(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str && str[i] && str[i] == ' ')
+	while (str && str[i] && str[i] == ' ')
 		i++;
 	if (str && str[i] && str[i] != '1')
 		return (1);

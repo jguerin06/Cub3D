@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/08 12:10:37 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/14 13:22:02 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,24 @@
 
 // ------ Macros ------ //
 
-# define ERR_USAGE "usage : ./cub3d <path/to/map.cub>"
-# define ERR_INVALID_FILE "File doesn't exist"
-# define ERR_FILE_NOT_CUB "Not a .cub file"
-# define ERR_FILE_NOT_PNG "Not a .png file"
-# define ERR_FILE_IS_DIR "is a directory"
-# define ERR_INVALID_MAP "Map description is either wrong or incomplete"
-# define ERR_INV_LETTER "Invalid letter in map"
-# define ERR_NUM_PLAYER "Map has more than one player"
-# define ERR_RGB_VAL "Invalid RGB value (min : 0, max : 255)"
-# define ERR_TEXTURE_MISS "Missing texture(s)"
-# define ERR_INV_TEXTURE "Invalid texture(s)"
-# define ERR_COLOR_MISS "Missing color(s)"
-# define ERR_MAP_MISSING "Missing map"
-# define ERR_MAP_TOO_SMALL "Map should be at least 3 lines high"
-# define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
-# define ERR_MAP_LAST "Map is not the last element in file"
-# define ERR_PLAYER_POS "Invalid player position"
-# define ERR_PLAYER_DIR "Map has nos player position (expected N, S, E or W)"
-
+# define ERR_USAGE "./cub3d <path/to/map.cub>\n"
+# define ERR_INVALID_FILE "File doesn't exist\n"
+# define ERR_FILE_NOT_CUB "Not a .cub file\n"
+# define ERR_FILE_NOT_PNG "Not a .png file\n"
+# define ERR_FILE_IS_DIR "is a directory\n"
+# define ERR_INVALID_MAP "Map description is either wrong or incomplete\n"
+# define ERR_INV_LETTER "Invalid letter in map\n"
+# define ERR_NUM_PLAYER "Map has more than one player\n"
+# define ERR_RGB_VAL "Invalid RGB value (min : 0, max : 255)\n"
+# define ERR_TEXTURE_MISS "Missing texture(s)\n"
+# define ERR_INV_TEXTURE "Invalid texture(s)\n"
+# define ERR_COLOR_MISS "Missing color(s)\n"
+# define ERR_MAP_MISSING "Missing map\n"
+# define ERR_MAP_TOO_SMALL "Map should be at least 3 lines high\n"
+# define ERR_MAP_NO_WALLS "Map is not surrounded by walls\n"
+# define ERR_MAP_LAST "Map is not the last element in file\n"
+# define ERR_PLAYER_POS "Invalid player position\n"
+# define ERR_PLAYER_DIR "Map has nos player position (expected N, S, E or W)\n"
 
 enum	e_output
 {
@@ -82,24 +81,23 @@ typedef struct s_infos
 	char	**map;
 	char	**truemap;
 
-
 }	t_struct2;
 
 // ------ Functions ------ //
 
-
-// ft_check //
+// ft_check_file //
 
 int				ft_is_cub(char *file);
-int				ft_is_xpm(char *file);
+int				ft_is_png(char *file);
 int				ft_is_dir(char *file);
-int				ft_check_all(char *file);
-int				ft_check_file(char *str, int countLine);
+int				ft_check_file(char *str, int i);
 int				copy_file(char *str, t_struct2 *s_infos);
+int				check_arg(char *file, bool cub);
 
 // ft_fill //
 
 char			**ft_fill_values(char **tab, t_struct *s_parse, char **values, int i);
+char			**ft_fill_map(char **tab);
 t_struct2		*ft_fill_info(t_struct2 *s_infos, char **tab, int i);
 
 // ft_error //
@@ -114,6 +112,9 @@ int				err_msg(char *arg, char *error, int code);
 
 t_struct		*ft_init_parsing(t_struct *s_parse);
 t_struct2		*ft_init_map(t_struct2 *s_infos);
+t_struct2		*ft_clear_struct2(t_struct2 *s_infos);
+void			ft_init_all(t_struct *s_parse, t_struct2 *s_infos);
+char			**ft_clear_tab(char **tab);
 
 // ft_map_utils //
 
@@ -132,11 +133,17 @@ t_struct		*ft_check_map(char **map, t_struct *s_parse, int i, int dup);
 
 int				ft_error(t_struct *s_parse);
 t_struct		*ft_get_error(t_struct *s_parse, char **tab, int i);
+int				ft_check_parsing(char **tab, int error);
 
-// utils //
+// ft_print //
 
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
+void			ft_print_error_map(t_struct *s_parse, int error);
+void			ft_print_no_values(t_struct *s_parse, int error);
+void			ft_print_wrong_text(t_struct *s_parse, int error);
+// utils //
+
 int				ft_strlenn(const char *s);
 int				ft_atoi(char *str);
 char			*ft_strdup(const char *src);

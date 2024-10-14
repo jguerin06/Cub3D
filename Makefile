@@ -6,7 +6,7 @@
 #    By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/19 10:29:40 by jguerin           #+#    #+#              #
-#    Updated: 2024/10/01 11:43:15 by jguerin          ###   ########.fr        #
+#    Updated: 2024/10/10 15:27:57 by jguerin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME = cub3D
 
 SRCS =	srcs/ft_check_file.c \
 			srcs/ft_error.c \
-			srcs/ft_init.c \
+			srcs/ft_fill.c \
+			srcs/ft_init_clear.c \
 			srcs/ft_map_utils.c \
 			srcs/ft_map.c \
 			srcs/ft_parsing.c \
+			srcs/ft_print.c \
 			srcs/ft_split.c \
 			srcs/ft_utils.c \
 			srcs/main.c \
