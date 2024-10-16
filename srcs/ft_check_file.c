@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 12:40:51 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/14 12:06:08 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/15 10:19:25 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,31 @@ int	ft_check_file(char *str, int countLine)
 }
 // s_infos y = countLine
 
-int	copy_file(char *str, t_struct2 *s_infos)
+char	**copy_file(char *str, int y)
 {
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
+	char	**tab;
 
 	i = 0;
-	s_infos->map = malloc(sizeof(char *) * (s_infos->y + 1));
-	if (s_infos->map == NULL)
-		return (-1);
+	tab = malloc(sizeof(char *) * (y + 1));
+	if (tab == NULL)
+		return (NULL);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-	{
-		close (fd);
-		return (-1);
-	}
+		return (NULL);
 	while (1)
 	{
-		s_infos->map[i] = get_next_line(fd);
-		if (s_infos->map[i] == NULL)
+		tab[i] = get_next_line(fd);
+		if (tab[i] == NULL)
 			break ;
 		i++;
 	}
 	close(fd);
-	return (0);
+	return (tab);
 }
 
-int	check_arg(char *file, bool cub)
+int	check_arg(char *file, int cub)
 {
 	int	fd;
 

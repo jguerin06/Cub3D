@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:01:07 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/12 10:36:58 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/15 15:16:25 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**ft_fill_map(char **tab)
 
 	i = 0;
 	j = 0;
-	map = (char **)malloc(sizeof(char *) * 100);
+	map = (char **)malloc(sizeof(char *) * 50);
 	if (!map)
 		return (NULL);
 	while (tab && tab[i])

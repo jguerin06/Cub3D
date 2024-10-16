@@ -6,13 +6,23 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:59:38 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/10 14:21:07 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/15 15:39:00 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 int	ft_strlenn(const char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+int	ft_sstrlen(char **s)
 {
 	int	i;
 

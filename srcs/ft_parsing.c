@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/14 13:22:08 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/15 15:06:58 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,19 +109,16 @@ int	ft_check_parsing(char **tab, int error)
 	values = (char **)malloc(sizeof(char *) * 9);
 	if (!values)
 		return (-1);
-	s_parse = ft_get_error(ft_init_parsing(s_parse), tab, 0);
+	s_parse = ft_init_parsing(s_parse);
+	s_parse = ft_get_error(s_parse, tab, 0);
 	values = ft_fill_values(tab, s_parse, values, 0);
 	map = ft_fill_map(tab);
 	s_parse = ft_check_error(values, s_parse);
 	s_parse = ft_check_map(map, s_parse, 0, 0);
 	ft_print_error(error, s_parse);
-	map = ft_clear_tab(tab);
+	map = ft_clear_tab(map);
 	values = ft_clear_tab(values);
 	if (ft_error(s_parse) == 1)
-	{
-		free(s_parse);
-		return (1);
-	}
-	free(s_parse);
-	return (0);
+		return (free(s_parse), 1);
+	return (free(s_parse), 0);
 }

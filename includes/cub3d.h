@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/14 13:22:02 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/16 11:33:03 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ typedef struct s_infos
 {
 	int		x;
 	int		y;
+	int		start_of_map;
+	int		end_of_map;
+	int		map_line;
 	char	*north;
 	char	*south;
 	char	*east;
@@ -80,6 +83,7 @@ typedef struct s_infos
 	char	*ceiling;
 	char	**map;
 	char	**truemap;
+	
 
 }	t_struct2;
 
@@ -90,9 +94,9 @@ typedef struct s_infos
 int				ft_is_cub(char *file);
 int				ft_is_png(char *file);
 int				ft_is_dir(char *file);
-int				ft_check_file(char *str, int i);
-int				copy_file(char *str, t_struct2 *s_infos);
-int				check_arg(char *file, bool cub);
+int				ft_check_file(char *str, int countLine);
+char			**copy_file(char *str, int y);
+int				check_arg(char *file, int cub);
 
 // ft_fill //
 
@@ -128,6 +132,8 @@ int				ft_other_char(char *str);
 int				ft_space_before(char *str);
 t_struct		*ft_check_map2(t_struct *s_parse, int dup, char *str);
 t_struct		*ft_check_map(char **map, t_struct *s_parse, int i, int dup);
+//void			get_true_map(char **tab);
+int				count_map_lines(char **map);
 
 // ft_parsing //
 
@@ -145,6 +151,7 @@ void			ft_print_wrong_text(t_struct *s_parse, int error);
 // utils //
 
 int				ft_strlenn(const char *s);
+int				ft_sstrlen(char **s);
 int				ft_atoi(char *str);
 char			*ft_strdup(const char *src);
 

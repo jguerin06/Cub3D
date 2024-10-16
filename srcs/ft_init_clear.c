@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:48:21 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/12 12:32:47 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/16 12:00:03 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ t_struct2	*ft_init_map(t_struct2 *s_infos)
 {
 	s_infos->x = 0;
 	s_infos->y = 0;
+	s_infos->start_of_map = -1;
+	s_infos->end_of_map = -1;
+	s_infos->map_line = 0;
 	s_infos->north = NULL;
 	s_infos->south = NULL;
 	s_infos->east = NULL;
@@ -51,7 +54,8 @@ char	**ft_clear_tab(char **tab)
 	i = 0;
 	while (tab && tab[i])
 		free(tab[i++]);
-	free(tab);
+	if (tab)
+		free(tab);
 	return (tab);
 }
 
