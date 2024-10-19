@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:48:21 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/16 12:00:03 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/19 14:32:40 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_struct	*ft_init_parsing(t_struct *s_parse)
 	s_parse->west = 0;
 	s_parse->floor = 0;
 	s_parse->ceiling = 0;
+	s_parse->wrong_line = 0;
 	s_parse->map_wg_char = 0;
 	s_parse->map_end = 0;
 	s_parse->map_wall = 0;
@@ -56,7 +57,7 @@ char	**ft_clear_tab(char **tab)
 		free(tab[i++]);
 	if (tab)
 		free(tab);
-	return (tab);
+	return (NULL);
 }
 
 t_struct2	*ft_clear_struct2(t_struct2 *s_infos)

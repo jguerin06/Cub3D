@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:01:07 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/15 15:16:25 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/19 16:39:48 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,36 +50,122 @@ char	**ft_fill_map(char **tab)
 		return (NULL);
 	while (tab && tab[i])
 	{
-		if (ft_space_before(tab[i]) == 1)
-		{
 			while (tab[i])
 				map[j++] = ft_strdup(tab[i++]);
 			break ;
-		}
 		i++;
 	}
 	map[j] = 0;
 	return (map);
 }
 
-t_struct2	*ft_fill_info(t_struct2 *s_infos, char **tab, int i)
+static char *get_info(char *info)
 {
+	int i;
+	char *output;
+	char **all;
+
+	i = -1;
+	output = NULL;
+	all = ft_split(info, ' ');
+	if (all && ft_sstrlen(all) != 2)
+		return (NULL);
+	output = ft_strdup(all[1]);
+	while (output[++i])
+		if (output[i] == '\n')
+			output[i] = '\0';
+	all = ft_clear_tab(all);
+	return (output);
+}
+
+/* floor celing */
+
+static int count_commas(char *color)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (color[i])
+	{
+		if (color[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+static int is_color(char **color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (color[j])
+	{
+		if (ft_strlen(color[j]) < 1 || ft_strlen(color[j]) > 3)
+			return (ERROR);
+		while (color[j][i])
+		{
+			if (color[j][i] < '0' || color[j][i] > '9')
+				return (ERROR);
+			i++;
+		}
+		if (ft_atoi(color[j]) > 255)
+			return (ERROR);
+		j++;
+		i = 0;
+	}
+	return (SUCCESS);
+}
+
+static char **get_color(char *line, int i)
+{
+	char **color;
+	char **tab;
+
+	color = NULL;
+	tab = ft_split(line, ' ');
+	if (tab && ft_sstrlen(tab) != 2)
+		return (NULL);
+	color = ft_split(tab[1], ',');
+	if (!color || count_commas(tab[1]) != 2 || ft_sstrlen(color) != 3)
+		return (NULL);
+	while (color[2][++i])
+		if (color[2][i] == '\n')
+			color[2][i] = '\0';
+	if (is_color(color) == ERROR)
+	{
+		tab = ft_clear_tab(tab);
+		return (NULL);
+	}
+	tab = ft_clear_tab(tab);
+	return (color);
+}
+
+/* end */
+
+void	ft_fill_info(t_struct2 *s_infos, char **tab)
+{
+	int i;
+
+	i = 0;
 	while (tab && tab[i])
 	{
 		if (ft_get_element(tab[i]) == 1)
-			s_infos->north = ft_strdup(tab[i] + 3);
+			s_infos->north = get_info(tab[i]);
 		if (ft_get_element(tab[i]) == 2)
-			s_infos->south = ft_strdup(tab[i] + 3);
+			s_infos->south = get_info(tab[i]);
 		if (ft_get_element(tab[i]) == 3)
-			s_infos->east = ft_strdup(tab[i] + 3);
+			s_infos->east = get_info(tab[i]);
 		if (ft_get_element(tab[i]) == 4)
-			s_infos->west = ft_strdup(tab[i] + 3);
+			s_infos->west = get_info(tab[i]);
 		if (ft_get_element(tab[i]) == 5)
-			s_infos->floor = ft_strdup(tab[i] + 2);
+			s_infos->floor = get_color(tab[i], -1);
 		if (ft_get_element(tab[i]) == 6)
-			s_infos->ceiling = ft_strdup(tab[i] + 2);
+			s_infos->ceiling = get_color(tab[i], -1);
 		i++;
 	}
-	s_infos->map = ft_fill_map(tab);
-	return (s_infos);
 }

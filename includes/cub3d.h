@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/16 11:33:03 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/19 14:55:16 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_infos
 	char	*south;
 	char	*east;
 	char	*west;
-	char	*floor;
-	char	*ceiling;
+	char	**floor;
+	char	**ceiling;
 	char	**map;
 	char	**truemap;
 	
@@ -102,7 +102,7 @@ int				check_arg(char *file, int cub);
 
 char			**ft_fill_values(char **tab, t_struct *s_parse, char **values, int i);
 char			**ft_fill_map(char **tab);
-t_struct2		*ft_fill_info(t_struct2 *s_infos, char **tab, int i);
+void			ft_fill_info(t_struct2 *s_infos, char **tab);
 
 // ft_error //
 
@@ -130,16 +130,16 @@ int				ft_is_diff(char c);
 
 int				ft_other_char(char *str);
 int				ft_space_before(char *str);
-t_struct		*ft_check_map2(t_struct *s_parse, int dup, char *str);
-t_struct		*ft_check_map(char **map, t_struct *s_parse, int i, int dup);
+void 			ft_check_map(char **map, t_struct *s_parse, int i, int dup);
 //void			get_true_map(char **tab);
-int				count_map_lines(char **map);
+// int				count_map_lines(char **map);
+int				count_map_lines(t_struct2 *map);
 
 // ft_parsing //
 
 int				ft_error(t_struct *s_parse);
-t_struct		*ft_get_error(t_struct *s_parse, char **tab, int i);
-int				ft_check_parsing(char **tab, int error);
+void			ft_get_error(t_struct *s_parse, char **tab, int i);
+int				ft_check_parsing(t_struct *pars, t_struct2 *map, int error);
 
 // ft_print //
 

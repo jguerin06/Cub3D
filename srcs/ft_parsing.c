@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/15 15:06:58 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/18 11:16:33 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_error(t_struct *s_parse)
 	return (0);
 }
 
-t_struct	*ft_get_error(t_struct *s_parse, char **tab, int i)
+void ft_get_error(t_struct *s_parse, char **tab, int i)
 {
 	while (tab[i])
 	{
@@ -39,14 +39,13 @@ t_struct	*ft_get_error(t_struct *s_parse, char **tab, int i)
 			s_parse->floor = ft_double(s_parse->floor);
 		else if (ft_get_element(tab[i]) == 6)
 			s_parse->ceiling = ft_double(s_parse->ceiling);
-		else if (ft_get_element(tab[i]) == 7)
-			s_parse->wrong_line = 1;
+		/*else if (ft_get_element(tab[i]) == 7) a tege sbatard il check le premier character et en plus c un fdp */
+			// s_parse->wrong_line = 1;
 		i++;
 	}
-	return (s_parse);
 }
 
-t_struct	*ft_check_error(char **values, t_struct *s_parse)
+static void ft_check_error(char **values, t_struct *s_parse)
 {
 	int	i;
 
@@ -67,7 +66,6 @@ t_struct	*ft_check_error(char **values, t_struct *s_parse)
 			s_parse->ceiling = ft_check_file(values[i], 3);
 		i++;
 	}
-	return (s_parse);
 }
 
 void	ft_print_error(int error, t_struct *s_parse)
@@ -97,28 +95,26 @@ void	ft_print_error(int error, t_struct *s_parse)
 	ft_print_error_map(s_parse, error);
 }
 
-int	ft_check_parsing(char **tab, int error)
+int	ft_check_parsing(t_struct *pars, t_struct2 *map, int error)
 {
 	char		**values;
-	char		**map;
-	t_struct	*s_parse;
+	char		**mapp;
 
-	s_parse = malloc(sizeof(t_struct));
-	if (!s_parse)
-		return (-1);
 	values = (char **)malloc(sizeof(char *) * 9);
 	if (!values)
 		return (-1);
-	s_parse = ft_init_parsing(s_parse);
-	s_parse = ft_get_error(s_parse, tab, 0);
-	values = ft_fill_values(tab, s_parse, values, 0);
-	map = ft_fill_map(tab);
-	s_parse = ft_check_error(values, s_parse);
-	s_parse = ft_check_map(map, s_parse, 0, 0);
-	ft_print_error(error, s_parse);
-	map = ft_clear_tab(map);
+	ft_get_error(pars, map->map, 0);
+	values = ft_fill_values(map->map, pars, values, 0);
+	mapp = ft_fill_map(map->truemap);
+	ft_check_error(values, pars);
+	(void)mapp;
+	(void)error;
+	ft_check_map(map->truemap, pars, 0, 0);
+	ft_print_error(error, pars);
+	/*map = ft_clear_tab(map);
 	values = ft_clear_tab(values);
 	if (ft_error(s_parse) == 1)
 		return (free(s_parse), 1);
-	return (free(s_parse), 0);
+	return (free(s_parse), 0);*/
+	return (0);
 }

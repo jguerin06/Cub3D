@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:13:26 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/15 14:57:16 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/19 14:44:49 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 int	ft_is_pos(char *str)
 {
 	int	i;
+	int	j;
 	int	dup;
 
 	i = 0;
 	dup = 0;
 	while (str && str[i])
 	{
+		j = 0;
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
-			dup++;
+				dup++;
+			j++;
 		i++;
 	}
 	return (dup);
@@ -42,11 +45,12 @@ int	ft_zero_oob(char *s1, char *s, char *s2)
 	if (i >= ft_strlenn(s2))
 		return (1);
 	return (0);
+	
 }
 
 int	ft_is_diff(char c)
 {
-	if (c != '\0' && c != '0' && c != '1' && c != '2' && c != ' ')
+	if (c != '\0' && c != '0' && c != '1' && c != '2' && c != ' ' && c != '\n')
 		return (1);
 	return (0);
 }

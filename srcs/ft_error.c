@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 14:49:15 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/10 14:28:09 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/19 13:06:39 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ int	map_wall(char *str)
 	int	i;
 
 	i = 0;
-	while (str && str[i] && str[i] == ' ')
+	while (str && str[i] && (str[i] == ' ' || str[i] == '1'))
 		i++;
-	while (str && str[i] && str[i] == '1')
-		i++;
-	if (str && str[i] == '\0')
+	if (str && (str[i] == '\0' || str[i] == '\n'))
+	{
+		//printf("char = %c", str[i]);
 		return (0);
+	}
 	return (1);
 }
 
@@ -70,11 +71,13 @@ int	wall_around(char *str)
 		return (1);
 	while (str && str[i])
 		i++;
-	i--;
-	if (str && str[i] != '1')
-		return (1);
-	return (0);
+	while (i > 0 && str[i - 1] == ' ')
+		i--;
+	if (str && str[i - 1] != '1')
+		return (0);
+	return (1); 
 }
+
 
 int	err_msg(char *arg, char *error, int code)
 {
