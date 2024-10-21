@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:48:21 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/19 14:32:40 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/21 16:16:11 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,24 @@ char	**ft_clear_tab(char **tab)
 	return (NULL);
 }
 
-t_struct2	*ft_clear_struct2(t_struct2 *s_infos)
+void	ft_clear_struct2(t_struct2 *map)
 {
-	free(s_infos->north);
-	free(s_infos->south);
-	free(s_infos->east);
-	free(s_infos->west);
-	free(s_infos->floor);
-	free(s_infos->ceiling);
-	s_infos->map = ft_clear_tab(s_infos->map);
-	free(s_infos);
-	return (s_infos);
+	if (map->ceiling)
+		ft_clear_tab(map->ceiling);
+	if (map->floor)
+		ft_clear_tab(map->floor);
+	if (map->map)
+		ft_clear_tab(map->map);
+	if (map->truemap)
+		ft_clear_tab(map->truemap);
+	if (map->north)
+		free(map->north);
+	if (map->south)
+		free(map->south);
+	if (map->east)
+		free(map->east);
+	if (map->west)
+		free(map->west);
 }
 
 void	ft_init_all(t_struct *s_parse, t_struct2 *s_infos)

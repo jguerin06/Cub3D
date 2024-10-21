@@ -6,13 +6,15 @@
 #    By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/19 10:29:40 by jguerin           #+#    #+#              #
-#    Updated: 2024/10/10 15:27:57 by jguerin          ###   ########.fr        #
+#    Updated: 2024/10/21 15:53:35 by jguerin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRCS =	srcs/ft_check_file.c \
+SRCS =	srcs/ft_check_arg.c \
+			srcs/ft_check_file.c \
+			srcs/ft_color.c \
 			srcs/ft_error.c \
 			srcs/ft_fill.c \
 			srcs/ft_init_clear.c \

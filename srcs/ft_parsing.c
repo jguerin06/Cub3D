@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/18 11:16:33 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/21 16:23:28 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_error(t_struct *s_parse)
 	return (0);
 }
 
-void ft_get_error(t_struct *s_parse, char **tab, int i)
+void	ft_get_error(t_struct *s_parse, char **tab, int i)
 {
 	while (tab[i])
 	{
@@ -39,31 +39,6 @@ void ft_get_error(t_struct *s_parse, char **tab, int i)
 			s_parse->floor = ft_double(s_parse->floor);
 		else if (ft_get_element(tab[i]) == 6)
 			s_parse->ceiling = ft_double(s_parse->ceiling);
-		/*else if (ft_get_element(tab[i]) == 7) a tege sbatard il check le premier character et en plus c un fdp */
-			// s_parse->wrong_line = 1;
-		i++;
-	}
-}
-
-static void ft_check_error(char **values, t_struct *s_parse)
-{
-	int	i;
-
-	i = 0;
-	while (values && values[i])
-	{
-		if (ft_get_element(values[i]) == 1 && s_parse->north == 1)
-			s_parse->north = ft_check_file(values[i], 3);
-		else if (ft_get_element(values[i]) == 2 && s_parse->south == 1)
-			s_parse->south = ft_check_file(values[i], 3);
-		else if (ft_get_element(values[i]) == 3 && s_parse->east == 1)
-			s_parse->east = ft_check_file(values[i], 3);
-		else if (ft_get_element(values[i]) == 4 && s_parse->west == 1)
-			s_parse->west = ft_check_file(values[i], 3);
-		else if (ft_get_element(values[i]) == 5 && s_parse->floor == 1)
-			s_parse->floor = ft_check_file(values[i], 3);
-		else if (ft_get_element(values[i]) == 6 && s_parse->ceiling == 1)
-			s_parse->ceiling = ft_check_file(values[i], 3);
 		i++;
 	}
 }
@@ -106,15 +81,13 @@ int	ft_check_parsing(t_struct *pars, t_struct2 *map, int error)
 	ft_get_error(pars, map->map, 0);
 	values = ft_fill_values(map->map, pars, values, 0);
 	mapp = ft_fill_map(map->truemap);
-	ft_check_error(values, pars);
-	(void)mapp;
 	(void)error;
+	mapp = ft_clear_tab(mapp);
 	ft_check_map(map->truemap, pars, 0, 0);
 	ft_print_error(error, pars);
-	/*map = ft_clear_tab(map);
 	values = ft_clear_tab(values);
-	if (ft_error(s_parse) == 1)
-		return (free(s_parse), 1);
-	return (free(s_parse), 0);*/
+	if (ft_error(pars) == 1)
+		return (1);
+	printf("parsing done, everything ok\n");
 	return (0);
 }

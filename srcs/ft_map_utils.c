@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:13:26 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/19 14:44:49 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/21 15:59:39 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	ft_is_pos(char *str)
 	{
 		j = 0;
 		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
-				dup++;
-			j++;
+			dup++;
+		j++;
 		i++;
 	}
 	return (dup);
@@ -45,7 +45,6 @@ int	ft_zero_oob(char *s1, char *s, char *s2)
 	if (i >= ft_strlenn(s2))
 		return (1);
 	return (0);
-	
 }
 
 int	ft_is_diff(char c)
@@ -56,3 +55,23 @@ int	ft_is_diff(char c)
 }
 
 // le 2 c'est pour le bonus
+
+int	size_of_map(t_struct2 *map)
+{
+	int	i;
+	int	big_len;
+
+	i = 0;
+	big_len = ft_strlenn(map->truemap[i]) - 1;
+	while (map->truemap[i])
+	{
+		if (ft_strlenn(map->truemap[i]) > big_len)
+			big_len = ft_strlenn(map->truemap[i]) - 1;
+		if (big_len > MAX_WIDTH)
+			return (err_msg(NULL, ERR_MAP_TOO_LARGE, 0), ERROR);
+		i++;
+		if (i > MAX_HEIGHT)
+			return (err_msg(NULL, ERR_MAP_TOO_LONG, 0), ERROR);
+	}
+	return (SUCCESS);
+}

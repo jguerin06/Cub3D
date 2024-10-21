@@ -1,18 +1,5 @@
-WIP = work in progress
-TBD = to be done
-
-Commencer la fonction qui regroupe le parsing : Done
-
-Trouver comment gerer le NO SO WE EA F C et tester si le chemin est valide : Done
-
-Faire les couleurs : TBD
-
-faire la fonction check map : Done
-
-
-UPDATE : 12 octobre :
-
-Norminette faite, parsing presque finit, il reste le parsing pour les couleurs
-Mettre de l'ordre dans les fonctions, check si y'a des erreurs
-Voir si y'a pas moyen d'optimiser quelques fonctions
-copy file leak
+To do :
+- conversion couleur char * en int
+- mettre texture dans struct mlx
+- corriger parsing coin de la map et les .png
+- Verifier les msg d'erreurs pour que ce soit plus joli

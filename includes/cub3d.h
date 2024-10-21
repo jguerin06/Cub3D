@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/19 14:55:16 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/21 15:57:04 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../GNL/get_next_line.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+//# include "../MLX42/include/MLX42/MLX42.h"
 
 // ------ Macros ------ //
 
@@ -35,12 +35,18 @@
 # define ERR_TEXTURE_MISS "Missing texture(s)\n"
 # define ERR_INV_TEXTURE "Invalid texture(s)\n"
 # define ERR_COLOR_MISS "Missing color(s)\n"
+# define ERR_INVALID_COLOR "Invalid color(s) parameter\n"
 # define ERR_MAP_MISSING "Missing map\n"
 # define ERR_MAP_TOO_SMALL "Map should be at least 3 lines high\n"
+# define ERR_MAP_TOO_LARGE "Map shouln't be larger than 30"
+# define ERR_MAP_TOO_LONG "Map shouln't be longer than 30"
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls\n"
 # define ERR_MAP_LAST "Map is not the last element in file\n"
 # define ERR_PLAYER_POS "Invalid player position\n"
 # define ERR_PLAYER_DIR "Map has nos player position (expected N, S, E or W)\n"
+
+# define MAX_WIDTH 30
+# define MAX_HEIGHT 30
 
 enum	e_output
 {
@@ -91,12 +97,16 @@ typedef struct s_infos
 
 // ft_check_file //
 
-int				ft_is_cub(char *file);
-int				ft_is_png(char *file);
-int				ft_is_dir(char *file);
-int				ft_check_file(char *str, int countLine);
+int				check_arg(char *file);
+
+// ft_check_file //
+
+int				ft_check_file(char *str);
 char			**copy_file(char *str, int y);
-int				check_arg(char *file, int cub);
+
+// ft_color //
+
+char			**get_color(char *line, int i);
 
 // ft_fill //
 
@@ -116,7 +126,7 @@ int				err_msg(char *arg, char *error, int code);
 
 t_struct		*ft_init_parsing(t_struct *s_parse);
 t_struct2		*ft_init_map(t_struct2 *s_infos);
-t_struct2		*ft_clear_struct2(t_struct2 *s_infos);
+void			ft_clear_struct2(t_struct2 *map);
 void			ft_init_all(t_struct *s_parse, t_struct2 *s_infos);
 char			**ft_clear_tab(char **tab);
 
@@ -125,12 +135,13 @@ char			**ft_clear_tab(char **tab);
 int				ft_is_pos(char *str);
 int				ft_zero_oob(char *s1, char *s, char *s2);
 int				ft_is_diff(char c);
+int				size_of_map(t_struct2 *map);
 
 // ft_map //
 
 int				ft_other_char(char *str);
 int				ft_space_before(char *str);
-void 			ft_check_map(char **map, t_struct *s_parse, int i, int dup);
+void			ft_check_map(char **map, t_struct *s_parse, int i, int dup);
 //void			get_true_map(char **tab);
 // int				count_map_lines(char **map);
 int				count_map_lines(t_struct2 *map);

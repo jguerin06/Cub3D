@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:01:07 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/19 16:39:48 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/21 15:29:32 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,20 @@ char	**ft_fill_map(char **tab)
 		return (NULL);
 	while (tab && tab[i])
 	{
-			while (tab[i])
-				map[j++] = ft_strdup(tab[i++]);
-			break ;
+		while (tab[i])
+			map[j++] = ft_strdup(tab[i++]);
+		break ;
 		i++;
 	}
 	map[j] = 0;
 	return (map);
 }
 
-static char *get_info(char *info)
+static char	*get_info(char *info)
 {
-	int i;
-	char *output;
-	char **all;
+	int		i;
+	char	*output;
+	char	**all;
 
 	i = -1;
 	output = NULL;
@@ -78,78 +78,9 @@ static char *get_info(char *info)
 	return (output);
 }
 
-/* floor celing */
-
-static int count_commas(char *color)
-{
-	int i;
-	int count;
-
-	i = 0;
-	count = 0;
-	while (color[i])
-	{
-		if (color[i] == ',')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-static int is_color(char **color)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (color[j])
-	{
-		if (ft_strlen(color[j]) < 1 || ft_strlen(color[j]) > 3)
-			return (ERROR);
-		while (color[j][i])
-		{
-			if (color[j][i] < '0' || color[j][i] > '9')
-				return (ERROR);
-			i++;
-		}
-		if (ft_atoi(color[j]) > 255)
-			return (ERROR);
-		j++;
-		i = 0;
-	}
-	return (SUCCESS);
-}
-
-static char **get_color(char *line, int i)
-{
-	char **color;
-	char **tab;
-
-	color = NULL;
-	tab = ft_split(line, ' ');
-	if (tab && ft_sstrlen(tab) != 2)
-		return (NULL);
-	color = ft_split(tab[1], ',');
-	if (!color || count_commas(tab[1]) != 2 || ft_sstrlen(color) != 3)
-		return (NULL);
-	while (color[2][++i])
-		if (color[2][i] == '\n')
-			color[2][i] = '\0';
-	if (is_color(color) == ERROR)
-	{
-		tab = ft_clear_tab(tab);
-		return (NULL);
-	}
-	tab = ft_clear_tab(tab);
-	return (color);
-}
-
-/* end */
-
 void	ft_fill_info(t_struct2 *s_infos, char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab && tab[i])
