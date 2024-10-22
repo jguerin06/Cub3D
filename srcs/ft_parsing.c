@@ -6,13 +6,13 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 16:23:28 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 14:34:14 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	ft_error(t_struct *s_parse)
+int	ft_error(t_parsing *s_parse)
 {
 	if (s_parse->north != 1 || s_parse->south != 1 || s_parse->west != 1
 		|| s_parse->east != 1 || s_parse->floor != 1 || s_parse->ceiling != 1
@@ -23,7 +23,7 @@ int	ft_error(t_struct *s_parse)
 	return (0);
 }
 
-void	ft_get_error(t_struct *s_parse, char **tab, int i)
+void	ft_get_error(t_parsing *s_parse, char **tab, int i)
 {
 	while (tab[i])
 	{
@@ -43,7 +43,7 @@ void	ft_get_error(t_struct *s_parse, char **tab, int i)
 	}
 }
 
-void	ft_print_error(int error, t_struct *s_parse)
+void	ft_print_error(int error, t_parsing *s_parse)
 {
 	if (error > 0 || s_parse->north != 1 || s_parse->south != 1
 		|| s_parse->west != 1 || s_parse->east != 1
@@ -70,7 +70,7 @@ void	ft_print_error(int error, t_struct *s_parse)
 	ft_print_error_map(s_parse, error);
 }
 
-int	ft_check_parsing(t_struct *pars, t_struct2 *map, int error)
+int	ft_check_parsing(t_parsing *pars, t_infomap *map, int error)
 {
 	char		**values;
 	char		**mapp;

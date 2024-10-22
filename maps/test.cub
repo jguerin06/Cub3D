@@ -1,7 +1,7 @@
 NO ./textures/Wall-1.png
 SO ./textures/Wall-2.png
 WE ./textures/Wall-3.png
-EA ./textures/Wall-4.lol
+EA ./textures/Wall-4.png
 
 F 220,100,000
 C 225,30,088

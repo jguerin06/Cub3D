@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 15:57:04 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:31:41 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 # include <fcntl.h>
 # include <math.h>
 # include "../GNL/get_next_line.h"
-//# include "../MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 // ------ Macros ------ //
 
 # define ERR_USAGE "./cub3d <path/to/map.cub>\n"
 # define ERR_INVALID_FILE "File doesn't exist\n"
-# define ERR_FILE_NOT_CUB "Not a .cub file\n"
+# define FILE_NOT_CUB "Not a .cub file\n"
 # define ERR_FILE_NOT_PNG "Not a .png file\n"
 # define ERR_FILE_IS_DIR "is a directory\n"
 # define ERR_INVALID_MAP "Map description is either wrong or incomplete\n"
@@ -72,12 +72,14 @@ typedef struct s_parse
 	int	no_map;
 	int	wrong_line;
 
-}	t_struct;
+}	t_parsing;
 
 typedef struct s_infos
 {
 	int		x;
 	int		y;
+	int		*floor_color;
+	int		*ceiling_color;
 	int		start_of_map;
 	int		end_of_map;
 	int		map_line;
@@ -89,15 +91,21 @@ typedef struct s_infos
 	char	**ceiling;
 	char	**map;
 	char	**truemap;
+	mlx_texture_t	*text_no;
+	mlx_texture_t	*text_so;
+	mlx_texture_t	*text_ea;
+	mlx_texture_t	*text_we;
 	
 
-}	t_struct2;
+}	t_infomap;
 
 // ------ Functions ------ //
 
-// ft_check_file //
+// ft_check_arg //
 
 int				check_arg(char *file);
+int				check_texture(t_infomap *map);
+int				load_texture(t_infomap *map);
 
 // ft_check_file //
 
@@ -107,12 +115,13 @@ char			**copy_file(char *str, int y);
 // ft_color //
 
 char			**get_color(char *line, int i);
+int				*convert_color(char **color);
 
 // ft_fill //
 
-char			**ft_fill_values(char **tab, t_struct *s_parse, char **values, int i);
+char			**ft_fill_values(char **tab, t_parsing *s_parse, char **values, int i);
 char			**ft_fill_map(char **tab);
-void			ft_fill_info(t_struct2 *s_infos, char **tab);
+void			ft_fill_info(t_infomap *s_infos, char **tab);
 
 // ft_error //
 
@@ -122,12 +131,15 @@ int				map_wall(char *str);
 int				wall_around(char *str);
 int				err_msg(char *arg, char *error, int code);
 
-// ft_init //
+// ft_init_clear //
 
-t_struct		*ft_init_parsing(t_struct *s_parse);
-t_struct2		*ft_init_map(t_struct2 *s_infos);
-void			ft_clear_struct2(t_struct2 *map);
-void			ft_init_all(t_struct *s_parse, t_struct2 *s_infos);
+t_parsing		*ft_init_parsing(t_parsing *s_parse);
+t_infomap		*ft_init_map(t_infomap *s_infos);
+void			ft_clear_struct2(t_infomap *map);
+
+// ft_init_utils //
+
+void			ft_init_all(t_parsing *s_parse, t_infomap *s_infos);
 char			**ft_clear_tab(char **tab);
 
 // ft_map_utils //
@@ -135,30 +147,30 @@ char			**ft_clear_tab(char **tab);
 int				ft_is_pos(char *str);
 int				ft_zero_oob(char *s1, char *s, char *s2);
 int				ft_is_diff(char c);
-int				size_of_map(t_struct2 *map);
+int				size_of_map(t_infomap *map);
 
 // ft_map //
 
 int				ft_other_char(char *str);
 int				ft_space_before(char *str);
-void			ft_check_map(char **map, t_struct *s_parse, int i, int dup);
+void			ft_check_map(char **map, t_parsing *s_parse, int i, int dup);
 //void			get_true_map(char **tab);
 // int				count_map_lines(char **map);
-int				count_map_lines(t_struct2 *map);
+int				count_map_lines(t_infomap *map);
 
 // ft_parsing //
 
-int				ft_error(t_struct *s_parse);
-void			ft_get_error(t_struct *s_parse, char **tab, int i);
-int				ft_check_parsing(t_struct *pars, t_struct2 *map, int error);
+int				ft_error(t_parsing *s_parse);
+void			ft_get_error(t_parsing *s_parse, char **tab, int i);
+int				ft_check_parsing(t_parsing *pars, t_infomap *map, int error);
 
 // ft_print //
 
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
-void			ft_print_error_map(t_struct *s_parse, int error);
-void			ft_print_no_values(t_struct *s_parse, int error);
-void			ft_print_wrong_text(t_struct *s_parse, int error);
+void			ft_print_error_map(t_parsing *s_parse, int error);
+void			ft_print_no_values(t_parsing *s_parse, int error);
+void			ft_print_wrong_text(t_parsing *s_parse, int error);
 // utils //
 
 int				ft_strlenn(const char *s);

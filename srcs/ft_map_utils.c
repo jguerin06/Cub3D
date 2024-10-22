@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 14:13:26 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 15:59:39 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 14:34:14 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_is_diff(char c)
 
 // le 2 c'est pour le bonus
 
-int	size_of_map(t_struct2 *map)
+int	size_of_map(t_infomap *map)
 {
 	int	i;
 	int	big_len;

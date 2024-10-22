@@ -1,5 +1,9 @@
-To do :
+To do 21/10 :
 - conversion couleur char * en int
 - mettre texture dans struct mlx
 - corriger parsing coin de la map et les .png
 - Verifier les msg d'erreurs pour que ce soit plus joli
+
+To do 22/10 :
+
+corriger parsing coin de la map

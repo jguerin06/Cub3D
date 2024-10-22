@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:57:32 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/14 09:53:09 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 12:08:14 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-void	ft_print_error_map(t_struct *s_parse, int error)
+void	ft_print_error_map(t_parsing *s_parse, int error)
 {
 	if (error == 0 && s_parse->map_wall == 1)
 		ft_putstr_fd("Warning: The map is not surrounded by walls\n", 2);
@@ -42,7 +42,7 @@ void	ft_print_error_map(t_struct *s_parse, int error)
 		ft_putstr_fd("Warning: No position have been found in the map\n", 2);
 }
 
-void	ft_print_no_values(t_struct *s_parse, int error)
+void	ft_print_no_values(t_parsing *s_parse, int error)
 {
 	if (error == 0 && s_parse->north == 0)
 		ft_putstr_fd("Warning: no north texture\n", 2);
@@ -60,7 +60,7 @@ void	ft_print_no_values(t_struct *s_parse, int error)
 		ft_putstr_fd("Warning: no map\n", 2);
 }
 
-void	ft_print_wrong_text(t_struct *s_parse, int error)
+void	ft_print_wrong_text(t_parsing *s_parse, int error)
 {
 	if (error == 0 && s_parse->north == 3)
 		ft_putstr_fd("Warning: Wrong north texture file\n", 2);

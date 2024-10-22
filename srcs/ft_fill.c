@@ -6,13 +6,13 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:01:07 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 15:29:32 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 14:34:14 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	**ft_fill_values(char **tab, t_struct *s_parse, char **values, int i)
+char	**ft_fill_values(char **tab, t_parsing *s_parse, char **values, int i)
 {
 	int	j;
 
@@ -78,7 +78,7 @@ static char	*get_info(char *info)
 	return (output);
 }
 
-void	ft_fill_info(t_struct2 *s_infos, char **tab)
+void	ft_fill_info(t_infomap *s_infos, char **tab)
 {
 	int	i;
 

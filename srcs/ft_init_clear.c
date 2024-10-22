@@ -6,13 +6,13 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:48:21 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 16:16:11 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:45:10 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-t_struct	*ft_init_parsing(t_struct *s_parse)
+t_parsing	*ft_init_parsing(t_parsing *s_parse)
 {
 	s_parse->north = 0;
 	s_parse->south = 0;
@@ -30,7 +30,7 @@ t_struct	*ft_init_parsing(t_struct *s_parse)
 	return (s_parse);
 }
 
-t_struct2	*ft_init_map(t_struct2 *s_infos)
+t_infomap	*ft_init_map(t_infomap *s_infos)
 {
 	s_infos->x = 0;
 	s_infos->y = 0;
@@ -43,24 +43,19 @@ t_struct2	*ft_init_map(t_struct2 *s_infos)
 	s_infos->west = NULL;
 	s_infos->floor = NULL;
 	s_infos->ceiling = NULL;
+	s_infos->ceiling_color = NULL;
+	s_infos->floor_color = NULL;
 	s_infos->map = NULL;
 	s_infos->truemap = NULL;
+	s_infos->text_no = NULL;
+	s_infos->text_so = NULL;
+	s_infos->text_ea = NULL;
+	s_infos->text_we = NULL;
+
 	return (s_infos);
 }
 
-char	**ft_clear_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab && tab[i])
-		free(tab[i++]);
-	if (tab)
-		free(tab);
-	return (NULL);
-}
-
-void	ft_clear_struct2(t_struct2 *map)
+void	ft_clear_struct2(t_infomap *map)
 {
 	if (map->ceiling)
 		ft_clear_tab(map->ceiling);
@@ -78,10 +73,16 @@ void	ft_clear_struct2(t_struct2 *map)
 		free(map->east);
 	if (map->west)
 		free(map->west);
-}
-
-void	ft_init_all(t_struct *s_parse, t_struct2 *s_infos)
-{
-	ft_init_parsing(s_parse);
-	ft_init_map(s_infos);
+	if (map->ceiling_color)
+		free(map->ceiling_color);
+	if (map->floor_color)
+		free(map->floor_color);
+	if (map->text_no)
+		mlx_delete_texture(map->text_no);
+	if (map->text_so)
+		mlx_delete_texture(map->text_so);
+	if (map->text_ea)
+		mlx_delete_texture(map->text_ea);
+	if (map->text_we)
+		mlx_delete_texture(map->text_we);
 }

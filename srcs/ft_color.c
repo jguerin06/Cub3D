@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:27:14 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 15:32:38 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 11:36:55 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,28 @@ char	**get_color(char *line, int i)
 	}
 	tab = ft_clear_tab(tab);
 	return (color);
+}
+
+int	*convert_color(char **color)
+{
+	int	i;
+	int	j;
+	int	*conv;
+
+	i = 0;
+	j = 0;
+	while (color[i])
+		i++;
+	conv = malloc(sizeof(int) * (i + 1));
+	if (!conv)
+		return (NULL);
+	while (color[j])
+	{
+		conv[j] = ft_atoi(color[j]);
+		j++;
+	}
+	conv[j] = 0;
+	return (conv);
 }
 
 // changer les msg d'erreurs

@@ -6,14 +6,14 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:38 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 16:12:11 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 15:41:20 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include <stdio.h>
 
-static int	copy_map(t_struct2 *map)
+static int	copy_map(t_infomap *map)
 {
 	int	i;
 	int	j;
@@ -29,7 +29,7 @@ static int	copy_map(t_struct2 *map)
 	return (SUCCESS);
 }
 
-static int	tmax(char *path, t_struct *pars, t_struct2 *map)
+static int	tmax(char *path, t_parsing *pars, t_infomap *map)
 {
 	map->y = ft_check_file(path);
 	if (map->y == ERROR)
@@ -45,53 +45,36 @@ static int	tmax(char *path, t_struct *pars, t_struct2 *map)
 	return (SUCCESS);
 }
 
-static int	check_info(t_struct2 *map)
+static int	check_info(t_infomap *map)
 {
 	if (!map->north || !map->east || !map->west || !map->south)
-		return (err_msg("Usage", ERR_TEXTURE_MISS, ERROR), ERROR);
+		return (err_msg(NULL, ERR_TEXTURE_MISS, ERROR));
 	if (!map->ceiling || !map->floor)
-		return (err_msg("Usage", ERR_COLOR_MISS, ERROR), ERROR);
+		return (err_msg(NULL, ERR_COLOR_MISS, ERROR));
+	if (check_texture(map) == -1)
+		return (ERROR);
+	map->floor_color = convert_color(map->floor);
+	map->ceiling_color = convert_color(map->ceiling);
 	return (SUCCESS);
 }
 
 int	main(int argc, char **argv)
 {
-	t_struct	parsing;
-	t_struct2	map;
+	t_parsing	parsing;
+	t_infomap	map;
 	int			error;
 
 	if (argc != 2)
 		return (err_msg("Usage", ERR_USAGE, ERROR));
 	ft_init_all(&parsing, &map);
 	error = check_arg(argv[1]);
-	if (tmax(argv[1], &parsing, &map) == ERROR)
-		return (ft_clear_struct2(&map), ERROR);
+	if (error == ERROR || tmax(argv[1], &parsing, &map) == ERROR)
+		return (ft_clear_struct2(&map), -1);
 	ft_fill_info(&map, map.map);
 	if (check_info(&map) == ERROR)
 		return (ft_clear_struct2(&map), ERROR);
+	load_texture(&map);
 	size_of_map(&map);
 	ft_check_parsing(&parsing, &map, error);
 	return (ft_clear_struct2(&map), SUCCESS);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	t_struct	parsing;
-	t_struct2	map;
-	char		**tab;
-	int			error;
-
-	if (argc != 2)
-		return (err_msg("Usage", ERR_USAGE, ERROR));
-	ft_init_all(&parsing, &map);
-	error = check_arg(argv[1], true);
-	map.y = ft_check_file(argv[1], 0);
-	tab = copy_file(argv[1], map.y);
-	ft_check_parsing(tab, error);
-	for (int i = 0; tab[i]; i++)
-		printf("%s", tab[i]);
-	printf("%d\n", error);
-	return (0);
-}
-*/

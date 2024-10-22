@@ -6,7 +6,7 @@
 #    By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/19 10:29:40 by jguerin           #+#    #+#              #
-#    Updated: 2024/10/21 15:53:35 by jguerin          ###   ########.fr        #
+#    Updated: 2024/10/22 12:52:26 by jguerin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS =	srcs/ft_check_arg.c \
 			srcs/ft_error.c \
 			srcs/ft_fill.c \
 			srcs/ft_init_clear.c \
+			srcs/ft_init_utils.c \
 			srcs/ft_map_utils.c \
 			srcs/ft_map.c \
 			srcs/ft_parsing.c \

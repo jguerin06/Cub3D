@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 14:49:15 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/21 15:44:17 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/22 16:10:59 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ int	wall_around(char *str)
 		return (0);
 	return (1);
 }
+/*
+static int check_corner(char **map, int i, int j)
+{
+    if (map[i][j] == '0')
+    {
+        if ((map[i + 1][j + 1] == '\n') || (map[i - 1][j - 1] == '\n') || (map[i - 1][j + 1] == '\n') || (map[i + 1][j - 1] == '\n'))
+            return (-1);
+        if ((map[i + 1][j + 1] == ' ') || (map[i - 1][j - 1] == ' ') || (map[i - 1][j + 1] == ' ') || (map[i + 1][j - 1] == ' '))
+            return (-1);
+    }   
+    return (0);
+}*/
 
 int	err_msg(char *arg, char *error, int code)
 {
