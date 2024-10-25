@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/22 15:31:41 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/25 14:47:23 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
-# include "../GNL/get_next_line.h"
+# include "../srcs/GNL/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-// ------ Macros ------ //
+// ------ Parsing ------ //
 
 # define ERR_USAGE "./cub3d <path/to/map.cub>\n"
 # define ERR_INVALID_FILE "File doesn't exist\n"
@@ -38,8 +38,8 @@
 # define ERR_INVALID_COLOR "Invalid color(s) parameter\n"
 # define ERR_MAP_MISSING "Missing map\n"
 # define ERR_MAP_TOO_SMALL "Map should be at least 3 lines high\n"
-# define ERR_MAP_TOO_LARGE "Map shouln't be larger than 30"
-# define ERR_MAP_TOO_LONG "Map shouln't be longer than 30"
+# define ERR_MAP_TOO_LARGE "Map shouln't be larger than 30\n"
+# define ERR_MAP_TOO_LONG "Map shouln't be longer than 30\n"
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls\n"
 # define ERR_MAP_LAST "Map is not the last element in file\n"
 # define ERR_PLAYER_POS "Invalid player position\n"
@@ -53,8 +53,6 @@ enum	e_output
 	SUCCESS = 0,
 	ERROR = -1
 };
-
-// ------ Structures ------ //
 
 typedef struct s_parse
 {
@@ -78,6 +76,8 @@ typedef struct s_infos
 {
 	int		x;
 	int		y;
+	int		height;
+	int		width;
 	int		*floor_color;
 	int		*ceiling_color;
 	int		start_of_map;
@@ -95,11 +95,109 @@ typedef struct s_infos
 	mlx_texture_t	*text_so;
 	mlx_texture_t	*text_ea;
 	mlx_texture_t	*text_we;
-	
-
 }	t_infomap;
 
-// ------ Functions ------ //
+// ------ Macros ------ //
+
+# define NAME		"Cub3D"
+
+# define PI			3.1415
+# define PLRSPEED	5
+
+# define WIDTH		3840
+# define HEIGHT		1920
+
+# define MAPSQUARE	48
+
+// ------ Colors ------ //
+
+# define BLACK	0x000000FF
+# define WHITE	0xFFFFFFFF
+# define RED	0xFF0000FF
+# define GREEN	0x00FF00FF
+# define BLUE	0x0000FFFF
+# define YELLOW	0xFFFF00FF
+# define PURPLE	0xFF00FFFF
+# define CYAN	0x00FFFFFF
+# define ORANGE	0xFFA500FF
+# define PINK	0xFFC0CBFF
+# define GREY	0x808080FF
+
+# define WALL	0x474F7AFF
+# define FLOOR	0xFFD0ECFF
+
+// ------ Structures ------ //
+
+typedef struct s_opt
+{
+	float		x;
+	float		y;
+	float		pdx;
+	float		pdy;
+	float		pa;
+	int			mouse_x;
+	int			mouse_y;
+	int			pos_x;
+	int			pos_y;
+	bool		mouse_visible;
+	char		direction;
+	char		*floor;
+	char		*ceiling;
+	char		**map;
+	mlx_t		*mlx;
+	mlx_image_t	*plr_img;
+	mlx_image_t	*map_img;
+	mlx_image_t	*ray_img;
+	mlx_image_t	*celling_img;
+	mlx_image_t	*floor_img;
+	mlx_image_t	*wall_img;
+	mlx_image_t	*weapon_img;
+	int			total_frames;
+	int			current_frame;
+	int			animation_active;
+	int			weapon;
+}	t_opt;
+
+// ------ Raycast ------ //
+
+int		start_raycast(t_infomap	map);
+void	draw_map(t_opt *opt, t_infomap map);
+void	draw_square(t_opt *opt, int x, int y, uint32_t color);
+void	init_player(t_opt *opt);
+void	put_player(t_opt *opt);
+void	draw_ray(t_opt *opt);
+void	draw_3d(t_opt *opt);
+void	ft_hook(void *param);
+void	draw_celling(t_opt *opt, t_infomap map);
+void	draw_floor(t_opt *opt, t_infomap map);
+void	exit_cub(t_opt *opt);
+void	draw_weapon(t_opt *opt, int	weapon);
+void	animate_knife(t_opt *opt);
+void	init_knife_animation(t_opt *opt);
+void	scrollhook(double xdelta, double ydelta, void* param);
+
+// ------ Utils ------ //
+
+int		get_rgba(int r, int g, int b, int a);
+char	*ft_itoa(int n);
+char	*ft_strjoin_nf(char *s1, char *s2);
+
+// ------ Movement ------ //
+
+void	turn_left(t_opt *opt);
+void	turn_right(t_opt *opt);
+void	go_right(t_opt *opt);
+void	go_left(t_opt *opt);
+void	go_up(t_opt *opt);
+void	go_down(t_opt *opt);
+
+// ------ Mouse ------ //
+
+void	mouse_control(t_opt *opt);
+void	mouse_visible(t_opt *opt);
+void	mouse_hidden(t_opt *opt);
+
+// ------ Parsing ------ //
 
 // ft_check_arg //
 
@@ -125,10 +223,7 @@ void			ft_fill_info(t_infomap *s_infos, char **tab);
 
 // ft_error //
 
-int				ft_get_element(char *str);
 int				ft_double(int i);
-int				map_wall(char *str);
-int				wall_around(char *str);
 int				err_msg(char *arg, char *error, int code);
 
 // ft_init_clear //
@@ -140,14 +235,22 @@ void			ft_clear_struct2(t_infomap *map);
 // ft_init_utils //
 
 void			ft_init_all(t_parsing *s_parse, t_infomap *s_infos);
-char			**ft_clear_tab(char **tab);
+void			ft_clear_tab(char **tab);
 
 // ft_map_utils //
 
+int				ft_get_element(char *str);
 int				ft_is_pos(char *str);
 int				ft_zero_oob(char *s1, char *s, char *s2);
 int				ft_is_diff(char c);
 int				size_of_map(t_infomap *map);
+
+// ft_map_utils 2//
+
+int				map_wall(char *str);
+int				wall_around(char *str);
+int				check_corner(char **map, int i, int j);
+int				player_position(t_infomap *map, t_opt *player);
 
 // ft_map //
 
@@ -177,6 +280,7 @@ int				ft_strlenn(const char *s);
 int				ft_sstrlen(char **s);
 int				ft_atoi(char *str);
 char			*ft_strdup(const char *src);
+char			**ft_sstrdup(char **s1);
 
 // split //
 
