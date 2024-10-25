@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 14:47:23 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/25 17:54:13 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,7 +271,7 @@ int				ft_check_parsing(t_parsing *pars, t_infomap *map, int error);
 
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
-void			ft_print_error_map(t_parsing *s_parse, int error);
+int				ft_print_error_map(t_parsing *s_parse, int error);
 void			ft_print_no_values(t_parsing *s_parse, int error);
 void			ft_print_wrong_text(t_parsing *s_parse, int error);
 // utils //

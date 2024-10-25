@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:01:07 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 16:33:54 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/25 17:19:50 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,17 @@ void	ft_fill_info(t_infomap *s_infos, char **tab)
 	i = 0;
 	while (tab && tab[i])
 	{
-		if (ft_get_element(tab[i]) == 1)
+		if (ft_get_element(tab[i]) == 1 && s_infos->north == NULL)
 			s_infos->north = get_info(tab[i]);
-		if (ft_get_element(tab[i]) == 2)
+		if (ft_get_element(tab[i]) == 2 && s_infos->south == NULL)
 			s_infos->south = get_info(tab[i]);
-		if (ft_get_element(tab[i]) == 3)
+		if (ft_get_element(tab[i]) == 3 && s_infos->east == NULL)
 			s_infos->east = get_info(tab[i]);
-		if (ft_get_element(tab[i]) == 4)
+		if (ft_get_element(tab[i]) == 4 && s_infos->west == NULL)
 			s_infos->west = get_info(tab[i]);
-		if (ft_get_element(tab[i]) == 5)
+		if (ft_get_element(tab[i]) == 5 && s_infos->floor == NULL)
 			s_infos->floor = get_color(tab[i], -1);
-		if (ft_get_element(tab[i]) == 6)
+		if (ft_get_element(tab[i]) == 6 && s_infos->ceiling == NULL)
 			s_infos->ceiling = get_color(tab[i], -1);
 		i++;
 	}

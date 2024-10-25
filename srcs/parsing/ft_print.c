@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 10:57:32 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 11:41:27 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/25 17:53:01 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-void	ft_print_error_map(t_parsing *s_parse, int error)
+int	ft_print_error_map(t_parsing *s_parse, int error)
 {
 	if (error == 0 && s_parse->map_wall == 1)
-		ft_putstr_fd("Warning: The map is not surrounded by walls\n", 2);
+		return(err_msg(NULL, ERR_MAP_NO_WALLS, ERROR));
 	if (error == 0 && s_parse->map_wg_char == 1)
-		ft_putstr_fd("Warning: Wrong charac have been found in the map\n", 2);
+		return(err_msg(NULL, "Wrong caracter in map", ERROR));
 	if (error == 0 && s_parse->map_end == 1)
-		ft_putstr_fd("Warning: The map is not at the end of the file\n", 2);
+		return(err_msg(NULL, ERR_MAP_LAST, ERROR));
 	if (error == 0 && s_parse->map_dup == 1)
-		ft_putstr_fd("Warning: Too much pos have been found in the map\n", 2);
+		return(err_msg(NULL, ERR_NUM_PLAYER, ERROR));
 	if (error == 0 && s_parse->map_no_pos == 1)
-		ft_putstr_fd("Warning: No position have been found in the map\n", 2);
+		return(err_msg(NULL, ERR_PLAYER_DIR, ERROR));
+	return (0);
 }
 
 void	ft_print_no_values(t_parsing *s_parse, int error)

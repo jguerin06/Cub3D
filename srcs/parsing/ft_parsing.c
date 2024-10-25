@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 15:44:45 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/25 18:03:04 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,13 @@ void	ft_get_error(t_parsing *s_parse, char **tab, int i)
 
 static int	ft_print_error(int error, t_parsing *s_parse)
 {
-	if (error > 0 || s_parse->north != 1 || s_parse->south != 1
-		|| s_parse->west != 1 || s_parse->east != 1
-		|| s_parse->floor != 1 || s_parse->ceiling
-		!= 1 || s_parse->map_wg_char == 1 || s_parse->map_end == 1
-		|| s_parse->map_wall == 1 || s_parse->map_dup == 1
-		|| s_parse->map_no_pos == 1 || s_parse->no_map == 1
-		|| s_parse->wrong_line == 1)
-		ft_putstr_fd("Error\n", 2);
-	ft_print_no_values(s_parse, error);
-	if (s_parse->wrong_line == 1 && error == 0)
-		ft_putstr_fd("Warning: One or more invalid lines have been found\n", 2);
 	if (error == 0 && (s_parse->north == 2
 			|| s_parse->south == 2 || s_parse->west == 2 || s_parse->east == 2
 			|| s_parse->floor == 2 || s_parse->ceiling == 2))
 		return (err_msg(NULL, "Dup in map", ERROR));
-	ft_print_wrong_text(s_parse, error);
-	ft_print_error_map(s_parse, error);
+	//ft_print_wrong_text(s_parse, error);
+	if (ft_print_error_map(s_parse, error) == -1)
+		return (ERROR);
 	return (0);
 }
 
@@ -79,7 +69,8 @@ int	ft_check_parsing(t_parsing *pars, t_infomap *map, int error)
 	(void)error;
 	ft_clear_tab(mapp);
 	ft_check_map(map->truemap, pars, 0, 0);
-	ft_print_error(error, pars);
+	if (ft_print_error(error, pars) == ERROR)
+		return (ERROR);
 	ft_clear_tab(values);
 	if (ft_error(pars) == 1)
 		return (1);

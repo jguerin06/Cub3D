@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 09:53:38 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 15:21:23 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/25 18:04:25 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	main(int argc, char **argv)
 		return (ft_clear_struct2(&map), ERROR);
 	load_texture(&map);
 	size_of_map(&map);
-	error = ft_check_parsing(&parsing, &map, error);
+	if (ft_check_parsing(&parsing, &map, error) == ERROR)
+		return (ft_clear_struct2(&map), ERROR);
 	start_raycast(map);
 	ft_clear_struct2(&map);
 	return (SUCCESS);
