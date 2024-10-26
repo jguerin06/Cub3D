@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 13:48:21 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/23 13:43:04 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/26 11:11:54 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,22 @@ t_infomap	*ft_init_map(t_infomap *s_infos)
 	s_infos->text_so = NULL;
 	s_infos->text_ea = NULL;
 	s_infos->text_we = NULL;
-
 	return (s_infos);
 }
 
-void	ft_clear_struct2(t_infomap *map)
+void	ft_clear_map2(t_infomap *map)
+{
+	if (map->text_no)
+		mlx_delete_texture(map->text_no);
+	if (map->text_so)
+		mlx_delete_texture(map->text_so);
+	if (map->text_ea)
+		mlx_delete_texture(map->text_ea);
+	if (map->text_we)
+		mlx_delete_texture(map->text_we);
+}
+
+void	ft_clear_map(t_infomap *map)
 {
 	if (map->ceiling)
 		ft_clear_tab(map->ceiling);
@@ -79,12 +90,5 @@ void	ft_clear_struct2(t_infomap *map)
 		free(map->ceiling_color);
 	if (map->floor_color)
 		free(map->floor_color);
-	if (map->text_no)
-		mlx_delete_texture(map->text_no);
-	if (map->text_so)
-		mlx_delete_texture(map->text_so);
-	if (map->text_ea)
-		mlx_delete_texture(map->text_ea);
-	if (map->text_we)
-		mlx_delete_texture(map->text_we);
+	ft_clear_map2(map);
 }

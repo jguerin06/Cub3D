@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 17:54:13 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/26 16:01:29 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@
 # define ERR_COLOR_MISS "Missing color(s)\n"
 # define ERR_INVALID_COLOR "Invalid color(s) parameter\n"
 # define ERR_MAP_MISSING "Missing map\n"
+# define ERR_MAP_DUP "Dup has been found in map\n"
 # define ERR_MAP_TOO_SMALL "Map should be at least 3 lines high\n"
-# define ERR_MAP_TOO_LARGE "Map shouln't be larger than 30\n"
-# define ERR_MAP_TOO_LONG "Map shouln't be longer than 30\n"
+# define ERR_MAP_TOO_LARGE "Map shouldn't be larger than 30\n"
+# define ERR_MAP_TOO_LONG "Map shouldn't be longer than 30\n"
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls\n"
 # define ERR_MAP_LAST "Map is not the last element in file\n"
 # define ERR_PLAYER_POS "Invalid player position\n"
@@ -203,11 +204,13 @@ void	mouse_hidden(t_opt *opt);
 
 int				check_arg(char *file);
 int				check_texture(t_infomap *map);
-int				load_texture(t_infomap *map);
 
 // ft_check_file //
 
 int				ft_check_file(char *str);
+int				load_texture(t_infomap *map);
+int				copy_map(t_infomap *map);
+int				check_info(t_infomap *map);
 char			**copy_file(char *str, int y);
 
 // ft_color //
@@ -230,7 +233,9 @@ int				err_msg(char *arg, char *error, int code);
 
 t_parsing		*ft_init_parsing(t_parsing *s_parse);
 t_infomap		*ft_init_map(t_infomap *s_infos);
-void			ft_clear_struct2(t_infomap *map);
+void			ft_clear_map(t_infomap *map);
+void			ft_clear_map2(t_infomap *map);
+
 
 // ft_init_utils //
 
@@ -239,32 +244,35 @@ void			ft_clear_tab(char **tab);
 
 // ft_map_utils //
 
-int				ft_get_element(char *str);
-int				ft_is_pos(char *str);
 int				ft_zero_oob(char *s1, char *s, char *s2);
-int				ft_is_diff(char c);
 int				size_of_map(t_infomap *map);
+int				count_map_lines(t_infomap *map);
 
-// ft_map_utils 2//
+// ft_map_utils 2 //
 
 int				map_wall(char *str);
 int				wall_around(char *str);
 int				check_corner(char **map, int i, int j);
 int				player_position(t_infomap *map, t_opt *player);
+int				check_map_is_at_the_end(t_infomap *map);
+
+// ft_map_utils 3 //
+
+int				ft_get_element(char *str);
+int				ft_is_pos(char *str);
+int				ft_other_char(char *str);
+int				ft_is_diff(char c);
+
 
 // ft_map //
 
-int				ft_other_char(char *str);
-int				ft_space_before(char *str);
 void			ft_check_map(char **map, t_parsing *s_parse, int i, int dup);
-//void			get_true_map(char **tab);
-// int				count_map_lines(char **map);
-int				count_map_lines(t_infomap *map);
 
 // ft_parsing //
 
 int				ft_error(t_parsing *s_parse);
 void			ft_get_error(t_parsing *s_parse, char **tab, int i);
+int				map_initializer(char *path, t_parsing *pars, t_infomap *map);
 int				ft_check_parsing(t_parsing *pars, t_infomap *map, int error);
 
 // ft_print //
@@ -272,8 +280,7 @@ int				ft_check_parsing(t_parsing *pars, t_infomap *map, int error);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 int				ft_print_error_map(t_parsing *s_parse, int error);
-void			ft_print_no_values(t_parsing *s_parse, int error);
-void			ft_print_wrong_text(t_parsing *s_parse, int error);
+
 // utils //
 
 int				ft_strlenn(const char *s);

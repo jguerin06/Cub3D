@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:27:14 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 16:34:49 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/26 14:57:47 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ char	**get_color(char *line, int i)
 	if (!tab)
 		return (NULL);
 	if (ft_sstrlen(tab) != 2)
-	{
-		ft_clear_tab(tab);
-		return NULL;
-	}
+		return (ft_clear_tab(tab), NULL);
 	color = ft_split(tab[1], ',');
 	if (!color)
 		return (ft_clear_tab(tab), NULL);
@@ -76,11 +73,7 @@ char	**get_color(char *line, int i)
 		if (color[2][i] == '\n')
 			color[2][i] = '\0';
 	if (is_color(color) == ERROR)
-	{
-		ft_clear_tab(tab);
-		ft_clear_tab(color);
-		return (err_msg("Usage", ERR_RGB_VAL, ERROR), NULL);
-	}
+		return (ft_clear_tab(tab), ft_clear_tab(color), NULL);
 	return (ft_clear_tab(tab), color);
 }
 

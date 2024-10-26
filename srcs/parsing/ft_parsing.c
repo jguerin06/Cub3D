@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 11:07:24 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 18:03:04 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/26 15:59:29 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,28 @@ static int	ft_print_error(int error, t_parsing *s_parse)
 	if (error == 0 && (s_parse->north == 2
 			|| s_parse->south == 2 || s_parse->west == 2 || s_parse->east == 2
 			|| s_parse->floor == 2 || s_parse->ceiling == 2))
-		return (err_msg(NULL, "Dup in map", ERROR));
-	//ft_print_wrong_text(s_parse, error);
+		return (err_msg(NULL, ERR_MAP_DUP, ERROR));
 	if (ft_print_error_map(s_parse, error) == -1)
 		return (ERROR);
 	return (0);
+}
+
+int	map_initializer(char *path, t_parsing *pars, t_infomap *map)
+{
+	map->y = ft_check_file(path);
+	if (map->y == ERROR)
+		return (ERROR);
+	map->map = copy_file(path, map->y);
+	if (map->map == NULL)
+		return (ERROR);
+	if (count_map_lines(map) == ERROR)
+		return (ERROR);
+	if (check_map_is_at_the_end(map) == ERROR)
+		return (err_msg(NULL, ERR_MAP_LAST, ERROR));
+	if (copy_map(map) == ERROR)
+		return (ERROR);
+	(void)pars;
+	return (SUCCESS);
 }
 
 int	ft_check_parsing(t_parsing *pars, t_infomap *map, int error)
@@ -70,7 +87,7 @@ int	ft_check_parsing(t_parsing *pars, t_infomap *map, int error)
 	ft_clear_tab(mapp);
 	ft_check_map(map->truemap, pars, 0, 0);
 	if (ft_print_error(error, pars) == ERROR)
-		return (ERROR);
+		return (ft_clear_tab(values), ERROR);
 	ft_clear_tab(values);
 	if (ft_error(pars) == 1)
 		return (1);

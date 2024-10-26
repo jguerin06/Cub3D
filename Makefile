@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lforgion <lforgion@student.42.fr>          +#+  +:+       +#+         #
+#    By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/19 10:29:40 by jguerin           #+#    #+#              #
-#    Updated: 2024/10/24 16:11:57 by lforgion         ###   ########.fr        #
+#    Updated: 2024/10/26 15:48:03 by jguerin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS =	srcs/raycast/main.c \
 		srcs/parsing/ft_init_utils.c \
 		srcs/parsing/ft_map_utils.c \
 		srcs/parsing/ft_map_utils2.c \
+		srcs/parsing/ft_map_utils3.c \
 		srcs/parsing/ft_map.c \
 		srcs/parsing/ft_parsing.c \
 		srcs/parsing/ft_print.c \

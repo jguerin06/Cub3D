@@ -1,0 +1,10 @@
+NO ./textures/Wall-1.png
+SO ./textures/Wall-2.png
+WE ./textures/Wall-3.png
+EA ./textures/Wall-4.png
+
+F 73,54,40
+C 125,181,255
+
+11111111111111111111
+11111111111111111111

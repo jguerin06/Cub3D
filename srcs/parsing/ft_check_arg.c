@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 15:40:11 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/25 11:43:53 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/26 11:15:49 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,13 @@ int	check_arg(char *file)
 
 int	check_texture(t_infomap *map)
 {
-		if (ft_is_png(map->north) == -1)
-			return (err_msg(map->north, ERR_FILE_NOT_PNG, ERROR));
-		if (ft_is_png(map->south) == -1)
-			return (err_msg(map->south, ERR_FILE_NOT_PNG, ERROR));
-		if (ft_is_png(map->east) == -1)
-			return (err_msg(map->east, ERR_FILE_NOT_PNG, ERROR));
-		if (ft_is_png(map->west) == -1)
-			return (err_msg(map->west, ERR_FILE_NOT_PNG, ERROR));
-	return (SUCCESS);
-}
-
-int	load_texture(t_infomap *map)
-{
-	map->text_no = mlx_load_png(map->north);
-	if (!map->text_no)
-		return (err_msg(map->north, ERR_TEXTURE_MISS, ERROR));
-	map->text_so = mlx_load_png(map->south);
-	if (!map->text_so)
-		return (err_msg(map->south, ERR_TEXTURE_MISS, ERROR));
-	map->text_ea = mlx_load_png(map->east);
-	if (!map->text_ea)
-		return (err_msg(map->east, ERR_TEXTURE_MISS, ERROR));
-	map->text_we = mlx_load_png(map->west);
-	if (!map->text_we)
-		return (err_msg(map->west, ERR_TEXTURE_MISS, ERROR));
+	if (ft_is_png(map->north) == -1)
+		return (err_msg(map->north, ERR_FILE_NOT_PNG, ERROR));
+	if (ft_is_png(map->south) == -1)
+		return (err_msg(map->south, ERR_FILE_NOT_PNG, ERROR));
+	if (ft_is_png(map->east) == -1)
+		return (err_msg(map->east, ERR_FILE_NOT_PNG, ERROR));
+	if (ft_is_png(map->west) == -1)
+		return (err_msg(map->west, ERR_FILE_NOT_PNG, ERROR));
 	return (SUCCESS);
 }
