@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 11:30:36 by jguerin           #+#    #+#             */
-/*   Updated: 2024/10/26 16:01:29 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/27 11:34:53 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,16 @@ typedef struct s_infos
 
 # define NAME		"Cub3D"
 
-# define PI			3.1415
-# define PLRSPEED	5
+// # define WIDTH		3840
+// # define HEIGHT		1920
+// # define MAPSQUARE	48.0
 
-# define WIDTH		3840
-# define HEIGHT		1920
+# define WIDTH		1920
+# define HEIGHT		1080
+# define MAPSQUARE	16.0
 
-# define MAPSQUARE	48
+# define PI			3.14159265359
+# define PLRSPEED	1
 
 // ------ Colors ------ //
 
@@ -157,7 +160,15 @@ typedef struct s_opt
 	int			current_frame;
 	int			animation_active;
 	int			weapon;
+	mlx_texture_t	*textures[4];
 }	t_opt;
+
+typedef struct s_vector
+{
+	float	x;
+	float	y;
+	bool	hit;
+}	t_vector;
 
 // ------ Raycast ------ //
 
@@ -176,9 +187,15 @@ void	draw_weapon(t_opt *opt, int	weapon);
 void	animate_knife(t_opt *opt);
 void	init_knife_animation(t_opt *opt);
 void	scrollhook(double xdelta, double ydelta, void* param);
+void	draw_little_square(mlx_image_t *img, int x, int y, int size, int color);
+t_vector	wall_intersector(t_vector v1, double a1, t_vector v2, double a2);
+t_vector	next_grid_intersector(t_vector player, double angle, int x, int y);
 
 // ------ Utils ------ //
 
+void	render_wall(t_opt *opt, int ray_index, double dist, int facing, double border_dist);
+int		find_pixel_color(mlx_texture_t *texture, int x, int y);
+int		is_vertical(double x, double y);
 int		get_rgba(int r, int g, int b, int a);
 char	*ft_itoa(int n);
 char	*ft_strjoin_nf(char *s1, char *s2);

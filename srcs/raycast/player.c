@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lforgion <lforgion@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:23:43 by lforgion          #+#    #+#             */
-/*   Updated: 2024/10/24 04:04:24 by lforgion         ###   ########.fr       */
+/*   Updated: 2024/10/27 10:53:14 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_facing(t_opt *opt)
 	if (opt->direction == 'N')
 		opt->pa = PI / 2;
 	else if (opt->direction == 'S')
-		opt->pa = 3 * PI / 2;
+		opt->pa = -PI / 2;
 	else if (opt->direction == 'W')
 		opt->pa = PI;
 	else if (opt->direction == 'E')
@@ -35,8 +35,8 @@ void	init_player(t_opt *opt)
 
 void	put_player(t_opt *opt)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -46,7 +46,8 @@ void	put_player(t_opt *opt)
 	{
 		while (j < 15)
 		{
-			mlx_put_pixel(opt->plr_img, opt->x + i, opt->y + j, get_rgba(129, 104, 157, 255));
+			mlx_put_pixel(opt->plr_img, opt->x + i, opt->y + j,
+				get_rgba(129, 104, 157, 255));
 			j++;
 		}
 		j = 0;

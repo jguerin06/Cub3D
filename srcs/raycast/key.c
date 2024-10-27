@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lforgion <lforgion@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:21:24 by lforgion          #+#    #+#             */
-/*   Updated: 2024/10/24 17:09:32 by lforgion         ###   ########.fr       */
+/*   Updated: 2024/10/27 10:34:42 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void scrollhook(double xdelta, double ydelta, void* param)
+void	scrollhook(double xdelta, double ydelta, void *param)
 {
 	t_opt	*opt;
 
@@ -29,16 +29,16 @@ void scrollhook(double xdelta, double ydelta, void* param)
 	draw_weapon(opt, opt->weapon);
 }
 
-static void update_all(t_opt *opt)
+static void	update_all(t_opt *opt)
 {
 	opt->plr_img->instances[0].x = opt->x - 7;
 	opt->plr_img->instances[0].y = opt->y - 7;
 	if (opt->animation_active)
 		animate_knife(opt);
 	mouse_control(opt);
-	draw_ray(opt); // Temporary
 	draw_3d(opt);
 }
+// draw_ray(opt); apres mouse control et avant draw3d
 
 static void	ft_hook_extra(t_opt *opt)
 {
@@ -51,16 +51,18 @@ static void	ft_hook_extra(t_opt *opt)
 	update_all(opt);
 }
 
-void	ft_hook(void* param)
+void	ft_hook(void *param)
 {
 	t_opt	*opt;
 
 	opt = param;
 	if (mlx_is_key_down(opt->mlx, MLX_KEY_ESCAPE))
 		exit_cub(opt);
-	if (mlx_is_key_down(opt->mlx, MLX_KEY_UP) || mlx_is_key_down(opt->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(opt->mlx, MLX_KEY_UP)
+		|| mlx_is_key_down(opt->mlx, MLX_KEY_W))
 		go_up(opt);
-	if (mlx_is_key_down(opt->mlx, MLX_KEY_DOWN) || mlx_is_key_down(opt->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(opt->mlx, MLX_KEY_DOWN)
+		|| mlx_is_key_down(opt->mlx, MLX_KEY_S))
 		go_down(opt);
 	if (mlx_is_key_down(opt->mlx, MLX_KEY_A))
 		go_left(opt);

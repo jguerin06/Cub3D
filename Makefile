@@ -6,7 +6,7 @@
 #    By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/19 10:29:40 by jguerin           #+#    #+#              #
-#    Updated: 2024/10/26 15:48:03 by jguerin          ###   ########.fr        #
+#    Updated: 2024/10/27 11:16:46 by jguerin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,13 @@ SRCS =	srcs/raycast/main.c \
 		srcs/raycast/key.c \
 		srcs/raycast/player.c \
 		srcs/raycast/raycasting.c \
+		srcs/raycast/raycasting2.c \
 		srcs/raycast/utils.c \
 		srcs/raycast/exit.c \
 		srcs/raycast/sprite.c \
 		srcs/raycast/mouse.c \
 		srcs/raycast/moves.c \
+		srcs/raycast/moves2.c \
 		srcs/raycast/init.c \
 		srcs/raycast/animation.c \
 		srcs/parsing/main.c \
@@ -49,7 +51,7 @@ OBJS = $(SRCS:.c=.o)
 # ------------------------------ Flags -------------------------------
 
 CC		=	cc -Wall -Wextra -Werror
-DEBUG	=	-g3 -fsanitize=address
+DEBUG	=	
 MFLAGS	=	-Iinclude -ldl -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.9/lib" -pthread -lm
 
 # ------------------------------ Colors ------------------------------

@@ -6,7 +6,7 @@
 /*   By: lforgion <lforgion@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:10:46 by lforgion          #+#    #+#             */
-/*   Updated: 2024/10/24 16:11:02 by lforgion         ###   ########.fr       */
+/*   Updated: 2024/10/27 02:29:11 by lforgion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	animate_knife(t_opt *opt)
 	static int		time = 0;
 	mlx_texture_t	*text;
 
-	while (anim != 0 && ++time < 0)
+	while (anim != 0 && ++time < 1)
 		return ;
 	if (opt->weapon_img)
 		mlx_delete_image(opt->mlx, opt->weapon_img);

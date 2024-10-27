@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lforgion <lforgion@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 16:22:53 by lforgion          #+#    #+#             */
-/*   Updated: 2024/10/24 16:49:34 by lforgion         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:34:53 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,24 @@ void	draw_floor(t_opt *opt, t_infomap map)
 	}
 }
 
+void	draw_little_square(mlx_image_t *img, int x, int y, int size, int color)
+{
+	int	j;
+	int	k;
+
+	j = -size / 2;
+	while (j < size / 2)
+	{
+		k = -size / 2;
+		while (k < size / 2)
+		{
+			mlx_put_pixel(img, x + k, y + j, color);
+			k++;
+		}
+		j++;
+	}
+}
+
 void	draw_square(t_opt *opt, int x, int y, uint32_t color)
 {
 	int	i;
@@ -100,9 +118,13 @@ void	draw_map(t_opt *opt, t_infomap map)
 		while (j < (int)ft_strlen(opt->map[i]))
 		{
 			if (opt->map[i][j] == '1')
-				draw_square(opt, j * MAPSQUARE, i * MAPSQUARE, WALL);
-			else if (opt->map[i][j] == '0' || opt->map[i][j] == 'N' || opt->map[i][j] == 'S' || opt->map[i][j] == 'E' || opt->map[i][j] == 'W')
-				draw_square(opt, j * MAPSQUARE, i * MAPSQUARE, FLOOR);
+				draw_square(opt, j * MAPSQUARE, i * MAPSQUARE,
+					get_rgba(255, 0, 0, 255));
+			else if (opt->map[i][j] == '0' || opt->map[i][j] == 'N'
+				|| opt->map[i][j] == 'S' || opt->map[i][j] == 'E'
+				|| opt->map[i][j] == 'W')
+				draw_square(opt, j * MAPSQUARE, i * MAPSQUARE,
+					get_rgba(255, 248, 189, 255));
 			j++;
 		}
 		i++;

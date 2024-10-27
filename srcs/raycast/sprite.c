@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lforgion <lforgion@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 04:46:53 by lforgion          #+#    #+#             */
-/*   Updated: 2024/10/24 16:42:12 by lforgion         ###   ########.fr       */
+/*   Updated: 2024/10/27 11:39:14 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	draw_pickaxe(t_opt *opt)
 	opt->weapon_img->instances[0].z = 6;
 }
 
-void	draw_weapon(t_opt *opt, int	weapon)
+void	draw_weapon(t_opt *opt, int weapon)
 {
 	if (opt->animation_active)
 		return ;

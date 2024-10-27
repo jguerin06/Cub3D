@@ -6,7 +6,7 @@
 /*   By: jguerin <jguerin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 17:53:32 by lforgion          #+#    #+#             */
-/*   Updated: 2024/10/25 15:15:35 by jguerin          ###   ########.fr       */
+/*   Updated: 2024/10/27 10:32:35 by jguerin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	free_img(t_opt *opt)
 }
 
 void	exit_cub(t_opt *opt)
-{	
+{
 	ft_clear_tab(opt->map);
 	free_img(opt);
 	mlx_close_window(opt->mlx);
